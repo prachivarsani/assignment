@@ -1,121 +1,67 @@
-// Base abstract class
-abstract class Human {
-    private String fullName;
-    private int years;
+public static void main(String[] args) {
 
-    public Human(String fullName, int years) {
-        this.fullName = fullName;
-        this.years = years;
-    }
+    Scanner input = new Scanner(System.in);
 
-    public String getFullName() {
-        return fullName;
-    }
+    try {
+        // ===== CLIENT INPUT =====
+        System.out.print("Enter client name: ");
+        String cname = input.nextLine();
 
-    public int getYears() {
-        return years;
-    }
+        System.out.print("Enter client age: ");
+        int cage = input.nextInt();
+        input.nextLine();
 
-    public abstract void showInfo();
-}
+        System.out.print("Enter illness: ");
+        String illness = input.nextLine();
 
-// Second abstract class
-abstract class Employee extends Human {
-    protected double basicPay;
+        Client c1 = new Client(cname, cage, illness);
 
-    public Employee(String fullName, int years, double basicPay) {
-        super(fullName, years);
-        this.basicPay = basicPay;
-    }
+        System.out.println("----------------");
 
-    public abstract void computePay();
-}
+        // ===== SPECIALIST INPUT =====
+        System.out.print("Enter doctor name: ");
+        String dname = input.nextLine();
 
-// Concrete class 1
-class Client extends Human {
-    private String illnessType;
+        System.out.print("Enter doctor age: ");
+        int dage = input.nextInt();
 
-    public Client(String fullName, int years, String illnessType) {
-        super(fullName, years);
-        this.illnessType = illnessType;
-    }
+        System.out.print("Enter basic salary: ");
+        double salary = input.nextDouble();
+        input.nextLine();
 
-    @Override
-    public void showInfo() {
-        System.out.println("Client Name: " + getFullName());
-        System.out.println("Condition: " + illnessType);
-    }
-}
+        System.out.print("Enter specialization: ");
+        String field = input.nextLine();
 
-// Concrete class 2
-class Specialist extends Employee {
-    private String field;
+        Specialist s1 = new Specialist(dname, dage, salary, field);
 
-    public Specialist(String fullName, int years, double basicPay, String field) {
-        super(fullName, years, basicPay);
-        this.field = field;
-    }
+        System.out.println("----------------");
 
-    @Override
-    public void computePay() {
-        System.out.println("Monthly Pay: " + basicPay);
-    }
+        // ===== PAYMENT INPUT =====
+        System.out.print("Enter payment amount: ");
+        double amount = input.nextDouble();
 
-    @Override
-    public void showInfo() {
-        System.out.println("Doctor: " + getFullName());
-        System.out.println("Department: " + field);
-    }
-}
+        Payment pay1 = new Payment(amount);
 
-// Interface 1
-interface Payable {
-    void printReceipt();
-}
-
-// Concrete class 3
-class Payment implements Payable {
-    private double amount;
-
-    public Payment(double amount) {
-        this.amount = amount;
-    }
-
-    @Override
-    public void printReceipt() {
-        System.out.println("Payment Due: " + amount);
-    }
-}
-
-// Interface 2
-interface Reservable {
-    void reserveSlot();
-}
-
-// Concrete class 4
-class Schedule implements Reservable {
-
-    @Override
-    public void reserveSlot() {
-        System.out.println("Slot reserved successfully.");
-    }
-}
-
-// Main class
-public class HospitalSystemApp {
-    public static void main(String[] args) {
-
-        Client c1 = new Client("prachi", 22, "Flu");
-        Specialist s1 = new Specialist("Varsani", 45, 90000, "Neurology");
-        Payment pay1 = new Payment(750);
         Schedule sc1 = new Schedule();
+
+        System.out.println("\n===== OUTPUT =====");
 
         c1.showInfo();
         System.out.println("----------------");
+
         s1.showInfo();
         s1.computePay();
         System.out.println("----------------");
+
         pay1.printReceipt();
         sc1.reserveSlot();
+
+    } catch (InputMismatchException e) {
+        System.out.println("Error: Invalid input type! Please enter correct values.");
+    } catch (Exception e) {
+        System.out.println("Something went wrong. Please try again.");
+    } finally {
+        input.close();
+        System.out.println("Program ended safely.");
     }
 }
