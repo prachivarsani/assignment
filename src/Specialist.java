@@ -15,6 +15,16 @@ public class Specialist extends Employee {
     @Override
     public void showInfo() {
         System.out.println("Doctor: " + getFullName());
+        System.out.println("Age: " + getYears());
         System.out.println("Department: " + field);
+    }
+
+    // ===== GETTERS (REQUIRED FOR FILE HANDLING) =====
+    public String getField() {
+        return field;
+    }
+
+    public double getBasicPay() {
+        return basicPay;
     }
 }

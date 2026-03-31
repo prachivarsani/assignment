@@ -8,6 +8,7 @@ public abstract class Human {
         this.years = years;
     }
 
+    // ===== GETTERS =====
     public String getFullName() {
         return fullName;
     }
@@ -16,5 +17,6 @@ public abstract class Human {
         return years;
     }
 
+    // ===== ABSTRACT METHOD =====
     public abstract void showInfo();
 }

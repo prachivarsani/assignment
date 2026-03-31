@@ -12,4 +12,7 @@ public class Client extends Human {
         System.out.println("Client Name: " + getFullName());
         System.out.println("Condition: " + illnessType);
     }
+    public String getIllnessType() {
+    return illnessType;
+}
 }
